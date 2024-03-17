@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+    private static DatabaseHelper databaseHelper;
+
     private static Context c;
     public static final String DB_NAME = "PDADB";
     public static final int DB_VERSION = 1;
@@ -24,6 +26,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c = context;
 
         GetCreateString();
+    }
+
+    public static DatabaseHelper instanceOfDB(Context context){
+        if (databaseHelper == null){
+            databaseHelper = new DatabaseHelper(context);
+        }
+
+        return databaseHelper;
     }
 
     @Override

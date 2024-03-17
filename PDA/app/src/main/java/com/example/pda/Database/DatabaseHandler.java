@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 public class DatabaseHandler {
+
     private DatabaseHelper dbHelper;
     private Context context;
     private SQLiteDatabase sqLiteDatabase;

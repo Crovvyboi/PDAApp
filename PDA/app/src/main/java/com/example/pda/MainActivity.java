@@ -8,6 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.pda.Database.DatabaseHandler;
+import com.example.pda.Database.DatabaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -20,5 +23,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        loadFromDBToMemory();
+    }
+
+    private void loadFromDBToMemory(){
+        DatabaseHelper databaseHelper = DatabaseHelper.instanceOfDB(this);
+
     }
 }
