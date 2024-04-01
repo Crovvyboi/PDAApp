@@ -3,6 +3,7 @@ package com.example.pda.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.pda.R;
 
@@ -38,7 +39,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
         sqLiteDatabase.execSQL(CREATE_TABLE);
+        Log.i("Database", "Database created");
     }
 
     @Override
@@ -50,5 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         InputStream inputStream = c.getResources().openRawResource(R.raw.dbscript);
 
         CREATE_TABLE = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n"));
+        Log.d("Table script", CREATE_TABLE);
+        
     }
 }

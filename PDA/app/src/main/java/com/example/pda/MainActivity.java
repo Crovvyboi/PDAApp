@@ -61,6 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFromDBToMemory(){
         DatabaseHelper databaseHelper = DatabaseHelper.instanceOfDB(this);
-
+        databaseHelper.onCreate(databaseHelper.getWritableDatabase());
     }
 }

@@ -39,7 +39,8 @@ public class UitgaandActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create intent to bestelling_scherm
-
+                Intent intent = new Intent(getApplicationContext(), BestellingActivity.class);
+                startActivity(intent);
             }
         });
 

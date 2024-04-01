@@ -41,7 +41,8 @@ public class InkomendActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create intent to vracht_scherm
-
+                Intent intent = new Intent(getApplicationContext(), VrachtActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -49,7 +50,8 @@ public class InkomendActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create intent to plaatsen_scherm
-
+                Intent intent = new Intent(getApplicationContext(), PlaatsenActivity.class);
+                startActivity(intent);
 
             }
         });
