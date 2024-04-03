@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PDA"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode_ui"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,6 +33,7 @@
         <activity android:name="com.example.pda.PlaatsenActivity" />
         <activity android:name="com.example.pda.VrachtActivity" />
         <activity android:name="com.example.pda.BestellingActivity" />
+        <activity android:name="com.example.pda.CameraActivity" />
     </application>
 
 </manifest>
