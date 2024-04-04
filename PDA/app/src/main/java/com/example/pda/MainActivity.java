@@ -16,7 +16,7 @@ import com.example.pda.Database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ConstraintLayout toUitgaand, toInkomend;
+    private ConstraintLayout toUitgaand, toInkomend, toOverzicht;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-       // loadFromDBToMemory();
+       loadFromDBToMemory();
 
         InitWidgets();
     }
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public void InitWidgets(){
         toUitgaand = findViewById(R.id.toUitgaand);
         toInkomend = findViewById(R.id.toInkomend);
+        toOverzicht = findViewById(R.id.toOverzicht);
 
         toUitgaand.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create intent to inkomend_scherm
                 Intent intent = new Intent(getApplicationContext(), InkomendActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        toOverzicht.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create intent to overzicht_scherm
+                Intent intent = new Intent(getApplicationContext(), OverzichtActivity.class);
                 startActivity(intent);
             }
         });

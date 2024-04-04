@@ -34,6 +34,7 @@
         <activity android:name="com.example.pda.VrachtActivity" />
         <activity android:name="com.example.pda.BestellingActivity" />
         <activity android:name="com.example.pda.CameraActivity" />
+        <activity android:name="com.example.pda.OverzichtActivity" />
     </application>
 
 </manifest>
