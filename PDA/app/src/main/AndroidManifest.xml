@@ -35,6 +35,9 @@
         <activity android:name="com.example.pda.BestellingActivity" />
         <activity android:name="com.example.pda.CameraActivity" />
         <activity android:name="com.example.pda.OverzichtActivity" />
+        <activity android:name="com.example.pda.BestellingLabelActivity" />
+        <activity android:name="com.example.pda.BestellingScanActivity" />
+        <activity android:name="com.example.pda.BestellingLabelScanActivity" />
     </application>
 
 </manifest>

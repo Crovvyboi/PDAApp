@@ -1,16 +1,56 @@
 package com.example.pda.Bestelling;
 
 import com.example.pda.Product.Product;
-import com.example.pda.Product.ProductType;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Dictionary;
-import java.util.List;
 
 public class Bestelling {
-    private Integer bestellingID;
-    private BestellingStatus bestellingStatus;
+    private String bestellingID;
+    private String bestellingStatus;
     private Klant klant;
-    private Date plaatsingDatum;
-    private Dictionary<Product, Integer> besteldeProducten; // Product en aantal
+    private String plaatsingDatum;
+    private ArrayList<BestellingProduct> besteldeProducten;
+    private Adres verzendAdres;
+
+    public String getBestellingID() {
+        return bestellingID;
+    }
+
+    public String getBestellingStatus() {
+        return bestellingStatus;
+    }
+
+    public Klant getKlant() {
+        return klant;
+    }
+
+    public String  getPlaatsingDatum() {
+        return plaatsingDatum;
+    }
+
+    public void setBestellingID(String bestellingID) {
+        this.bestellingID = bestellingID;
+    }
+
+    public void setBestellingStatus(String bestellingStatus) {
+        this.bestellingStatus = bestellingStatus;
+    }
+
+    public void setKlant(Klant klant) {
+        this.klant = klant;
+    }
+
+    public void setPlaatsingDatum(String plaatsingDatum) {
+        this.plaatsingDatum = plaatsingDatum;
+    }
+
+    public Adres getVerzendAdres() {
+        return verzendAdres;
+    }
+
+    public void setVerzendAdres(Adres verzendAdres) {
+        this.verzendAdres = verzendAdres;
+    }
 }

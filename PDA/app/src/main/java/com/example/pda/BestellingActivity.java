@@ -30,7 +30,7 @@ public class BestellingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // go back
-                Intent intent = new Intent(getApplicationContext(), InkomendActivity.class);
+                Intent intent = new Intent(getApplicationContext(), UitgaandActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,14 +63,22 @@ public class BestellingActivity extends AppCompatActivity {
         if (requestCode == LAUNCH_SECOND_ACTIVITY) {
             if(resultCode == this.RESULT_OK){
                 String result=data.getStringExtra("BARCODE_DATA");
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
                 // Start verwerken bestelling
+                VerwerkBestelling(result);
+
             }
             if (resultCode == this.RESULT_CANCELED) {
                 // Write your code if there's no result
                 Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void VerwerkBestelling(String code){
+        // Intent to next page
+        Intent intent = new Intent(getApplicationContext(), BestellingScanActivity.class);
+        intent.putExtra("BARCODE", code);
+        startActivity(intent);
     }
 }

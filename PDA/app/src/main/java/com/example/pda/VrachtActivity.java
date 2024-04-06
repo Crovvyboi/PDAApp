@@ -10,6 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.pda.Database.DatabaseHelper;
+import com.example.pda.Database.VrachtDatabaseHandler;
+import com.example.pda.Product.Product;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class VrachtActivity extends AppCompatActivity {
     private int LAUNCH_SECOND_ACTIVITY = 1;
     private Button backbutton, homebutton;
@@ -62,9 +69,9 @@ public class VrachtActivity extends AppCompatActivity {
         if (requestCode == LAUNCH_SECOND_ACTIVITY) {
             if(resultCode == this.RESULT_OK){
                 String result=data.getStringExtra("BARCODE_DATA");
-                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
 
                 // Start verwerken vracht in database
+                VerwerkVracht(result);
 
             }
             if (resultCode == this.RESULT_CANCELED) {
@@ -72,5 +79,37 @@ public class VrachtActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void VerwerkVracht(String code){
+        // Check of de code in de vracht database bestaat
+        VrachtDatabaseHandler vrachtDatabaseHandler = new VrachtDatabaseHandler(this);
+        boolean check = vrachtDatabaseHandler.CheckIfVrachtExists(code);
+        if (check){
+            // Haal de producten op uit de vracht database
+            ArrayList<Product> vrachtProducten = new ArrayList<>();
+            vrachtProducten = vrachtDatabaseHandler.GetVrachtProducten(code);
+
+            // Begin met plaatsen van producten in systeem database
+            // Check voor elk product of het product al bestaat
+            for (Product product:
+                 vrachtProducten) {
+                if (vrachtDatabaseHandler.CheckIfProductExists(product)){
+                    // Ja, voeg het aantal toe aan de voorraad van het product
+                    vrachtDatabaseHandler.AddToExistingProduct(product);
+                }
+                else{
+                    // Nee, voeg de nieuwe producten toe aan de database
+                    vrachtDatabaseHandler.AddNewProduct(product);
+                }
+            }
+
+        }
+        else {
+            // Geef melding
+            Toast.makeText(this, "Vracht niet gevonden.", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 }

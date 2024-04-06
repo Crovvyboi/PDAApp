@@ -11,6 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.pda.Database.MagazijnDatabaseHandler;
+import com.example.pda.Database.VrachtDatabaseHandler;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PlaatsenActivity extends AppCompatActivity {
 
     private int LAUNCH_SECOND_ACTIVITY = 1;
@@ -92,11 +98,9 @@ public class PlaatsenActivity extends AppCompatActivity {
 
                 switch (data.getStringExtra("TARGET_VARIABLE")){
                     case "productnummer":
-                        Toast.makeText(getApplicationContext(), "productnummer: " + result, Toast.LENGTH_SHORT).show();
                         GetProductnummer(result);
                         break;
                     case "schapnummer":
-                        Toast.makeText(getApplicationContext(), "schapnummer: " + result, Toast.LENGTH_SHORT).show();
                         GetSchapnummer(result);
                         break;
                     default:
@@ -111,21 +115,48 @@ public class PlaatsenActivity extends AppCompatActivity {
     }
 
     private void GetProductnummer(String productnummer){
-        this.productnummer = productnummer;
-        this.prodText.setText(productnummer);
-        this.schapnummer = "";
-        this.schapText.setText("Scan de barcode op het schap");
+        // Check if Product exists
+        MagazijnDatabaseHandler magazijnDatabaseHandler = new MagazijnDatabaseHandler(getApplicationContext());
+        if (magazijnDatabaseHandler.CheckIfProductExists(productnummer)){
+            this.productnummer = productnummer;
+            this.prodText.setText(productnummer);
+            this.schapnummer = "";
+            this.schapText.setText("Scan de barcode op het schap");
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Product niet gevonden.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void GetSchapnummer(String schapnummer){
-        if (productnummer != null && productnummer != ""){
+        // Check if Schapnummer is in correct format
+        if (SchapRegex(schapnummer)){
             this.schapnummer = schapnummer;
             this.schapText.setText(schapnummer);
 
-            // Put new combination in database
+            // Check if there is both a Product and Schap scanned
+            if (productnummer != null && productnummer != ""){
+                // Put new combination in database
+                StartPlaatsen();
+            }
         }
-        else{
-            // Show popup with warning message
+        else {
+            Toast.makeText(getApplicationContext(), "Scan een schap.", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    public void StartPlaatsen(){
+        MagazijnDatabaseHandler magazijnDatabaseHandler = new MagazijnDatabaseHandler(getApplicationContext());
+        magazijnDatabaseHandler.PlaatsProductInSchap(this.productnummer, this.schapnummer);
+    }
+
+    public static boolean SchapRegex(final String input) {
+        // Compile regular expression
+        final Pattern pattern = Pattern.compile("\\d\\d-\\d\\d-\\d\\d", Pattern.CASE_INSENSITIVE);
+        // Match regex against input
+        final Matcher matcher = pattern.matcher(input);
+        // Use results...
+        return matcher.matches();
     }
 }

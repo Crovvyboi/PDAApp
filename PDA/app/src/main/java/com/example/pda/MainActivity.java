@@ -16,6 +16,7 @@ import com.example.pda.Database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static DatabaseHelper databaseHelper;
     private ConstraintLayout toUitgaand, toInkomend, toOverzicht;
 
     @Override
@@ -29,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-       loadFromDBToMemory();
+        if (databaseHelper == null){
+            loadFromDBToMemory();
+        }
 
         InitWidgets();
     }
@@ -68,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFromDBToMemory(){
-        DatabaseHelper databaseHelper = DatabaseHelper.instanceOfDB(this);
-        databaseHelper.onCreate(databaseHelper.getWritableDatabase());
+        databaseHelper = new DatabaseHelper(getApplicationContext()).instanceOfDB(this);
+        // databaseHelper.onCreate(databaseHelper.getWritableDatabase());
     }
 
 }

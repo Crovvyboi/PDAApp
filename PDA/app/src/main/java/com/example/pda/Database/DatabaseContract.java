@@ -26,6 +26,7 @@ public final class DatabaseContract {
         public static  final String COLUMN_NAME_BESTELLINGSTATUS = "bestellingStatus";
         public static  final String COLUMN_NAME_EMAIL = "email";
         public static  final String COLUMN_NAME_PLAATSINGDATUM = "plaatsingDatum";
+        public static  final String COLUMN_NAME_ADRESID = "adresID";
     }
 
     public static class Perceel implements BaseColumns{
@@ -34,7 +35,7 @@ public final class DatabaseContract {
         public static  final String COLUMN_NAME_DATUMAANMAAK = "datumAanmaak";
         public static  final String COLUMN_NAME_BESTELLINGID = "bestellingID";
         public static  final String COLUMN_NAME_TRANSPORTEURID = "transporteurID";
-        public static  final String COLUMN_NAME_ADRESID = "adresID";
+
     }
 
     public static class Transporteur implements BaseColumns{
@@ -46,7 +47,7 @@ public final class DatabaseContract {
 
     public static class Bestellingstatus implements BaseColumns{
         public static  final String TABLE_NAME = "BestellingStatus";
-        public static  final String COLUMN_NAME_BESTELLINGSTATUS = "bestellingStatus";
+        public static  final String COLUMN_NAME_BESTELLINGSTATUS = "bestellingStatusNaam";
     }
 
     public static class Bestellingproduct implements BaseColumns{
@@ -104,6 +105,7 @@ public final class DatabaseContract {
 
     public static class Vrachtlevering implements BaseColumns{
         public static  final String TABLE_NAME = "VrachtLevering";
+        public static final String COLUMN_NAME_ID = "vrachtID";
         public static  final String COLUMN_NAME_BARCODE = "barcode";
         public static  final String COLUMN_NAME_EAN = "ean";
         public static  final String COLUMN_NAME_AANTAL = "aantal";
